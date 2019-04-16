@@ -5,7 +5,7 @@
 ## 目录
 - [Redis](#Redis)
 - [Json](#Json)
-
+- [Http相关工具](#Http相关工具)
 
 ### Redis
    
@@ -71,3 +71,39 @@
    | json2list(String jsonArrayStr, Class<T> clazz) | List<T> | json字符串转List对象 |
    | map2pojo(Map map, Class<T> clazz) | T | Map转java对象 |
    | list2list(List<String> jsonList, Class<T> clazz) | List<T> | List<String>转List<T>java对象 |
+   
+### Http相关工具
+    
+   + 工具类
+        - [OkHttp封装](#OkHttp封装)
+        - [Request工具](#Request工具)
+        - [代理相关](#代理相关)
+        
+        #### OkHttp封装
+        
+        | 方法 | 返回值 | 描述 |
+        | :------ | :------ | :------ |
+        | get(String url, Map<String, String> queries) | String | Get请求 |
+        | post(String url, Map<String, String> params) | String | Post请求 |
+        | postJsonParams(String url, String jsonParams) | String | Post请求发送JSON数据 |
+        | postXmlParams(String url, String xml) | String | Post请求发送xml数据 |
+        
+        #### Request工具
+        
+        | 方法 | 返回值 | 描述 |
+        | :------ | :------ | :------ |
+        | getJoinPointInfoMap(JoinPoint joinPoint) | Map<String, Object> | 获取切入点参数信息 |
+        | getIp(HttpServletRequest request) | String | 获取IP |
+        | getRequestType(HttpServletRequest request) | Integer | 获取请求方式：1.传统请求(同步)  2.AJAX请求(异步) |
+        
+        #### 代理相关
+        
+        | 方法 | 返回值 | 描述 |
+        | :------ | :------ | :------ |
+        | getUserAgent(HttpServletRequest request) | UserAgent | 获取用户代理对象 |
+        | getDeviceType(HttpServletRequest request) | DeviceType | 获取设备类型 |
+        | isComputer(HttpServletRequest request) | boolean | 是否是PC |
+        | isMobile(HttpServletRequest request) | boolean | 是否是手机 |
+        | isMobileOrTablet(HttpServletRequest request) | boolean | 是否是手机和平板 |
+        | getBrowser(HttpServletRequest request) | Browser | 获取浏览类型 |
+        | isLteIE8(HttpServletRequest request) | boolean | 是否IE版本是否小于等于IE8 |

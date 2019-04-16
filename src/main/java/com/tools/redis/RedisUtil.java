@@ -525,7 +525,7 @@ public class RedisUtil {
      * 功能描述: 获取列表长度
      *
      * @param: key
-     * @return: 1：成功  0：失败
+     * @return: 非0：成功  0：失败/空集合
      * @auther: yin_q
      * @date: 2019/4/12 16:20
      */
@@ -774,7 +774,7 @@ public class RedisUtil {
      *
      * @param: key
      * @param: field
-     * @return: 
+     * @return: true：成功  false：失败
      * @auther: yin_q
      * @date: 2019/4/12 17:57
      */
