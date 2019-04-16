@@ -61,3 +61,13 @@
         | hexists(String key, String field) | true：成功  false：失败 | 查看哈希表 key 中，指定的field字段是否存在。 |
 
 ### Json
+    
+   | 方法 | 返回值 | 描述 |
+   | :------ | :------ | :------ |
+   | obj2json(Object obj) | String | 对象转json字符串 |
+   | json2pojo(String jsonStr, Class<T> clazz) | T | json转java bean对象 |
+   | json2map(String jsonStr) | Map<String, Object> | json字符串转Map |
+   | json2map(String jsonStr, Class<T> clazz) | Map<String, T> | json字符串转Map对象，value为指定java bean对象 |
+   | json2list(String jsonArrayStr, Class<T> clazz) | List<T> | json字符串转List对象 |
+   | map2pojo(Map map, Class<T> clazz) | T | Map转java对象 |
+   | list2list(List<String> jsonList, Class<T> clazz) | List<T> | List<String>转List<T>java对象 |
