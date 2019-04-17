@@ -1,9 +1,9 @@
 package com.tools.json;
 
-import ch.qos.logback.classic.Logger;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,11 +15,10 @@ import java.util.Map;
  * @Date: 2018/11/25 14:34
  * @Description: JSON转换工具类
  */
+@Slf4j
 public class JSONUtils {
 
     private final static ObjectMapper objectMapper = new ObjectMapper();
-
-    private static Logger log = (Logger) LoggerFactory.getLogger(JSONUtils.class);
 
     private JSONUtils() {}
 
@@ -41,7 +40,7 @@ public class JSONUtils {
         try {
             json = objectMapper.writeValueAsString(obj);
         } catch (Exception e){
-            log.info("json转换异常，待转换的数据：" + obj);
+            log.error("Json转换工具->json转换异常，待转换的数据{}", obj, e);
         }
         return json;
     }

@@ -135,7 +135,7 @@ public class OkHttpUtil{
                 responseBody = response.body().string();
             }
         } catch (Exception e) {
-            log.error(String.format("okhttp3 post error >> ex = {}", e.getMessage()));
+            log.error(String.format("http工具->请求失败", e.getMessage()));
         } finally {
             if (response != null) {
                 response.close();

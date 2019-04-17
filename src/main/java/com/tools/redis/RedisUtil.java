@@ -59,7 +59,7 @@ public class RedisUtil {
             if(jedisPool != null){
                 jedisPool.close();
             }
-            log.error("初始化redis连接池失败", e);
+            log.error("Redis工具->初始化Redis连接池失败", e);
         }
     }
 
@@ -112,7 +112,7 @@ public class RedisUtil {
                 jedis = jedisPool.getResource();
             }
         } catch (Exception e) {
-            log.error("同步获取Jedis实例失败:{}", e.getMessage(), e);
+            log.error("Redis工具->同步获取Jedis实例失败:{}", e.getMessage(), e);
             close(jedis);
         }
         
@@ -146,7 +146,7 @@ public class RedisUtil {
     public static String set(String key, String value){
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", key);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
             return null;
         }
 
@@ -154,7 +154,7 @@ public class RedisUtil {
         try{
             result = jedis.set(key, value);
         } catch (Exception e){
-            log.error("设置值{}失败:{}", key, e.getMessage(), e);
+            log.error("Redis工具->设置值{}失败:{}", key, e.getMessage(), e);
         } finally {
             close(jedis);
         }
@@ -175,7 +175,7 @@ public class RedisUtil {
     public static String set(String key, String value, int expire){
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", key);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
             return null;
         }
 
@@ -184,7 +184,7 @@ public class RedisUtil {
             result = jedis.set(key, value);
             jedis.expire(key, expire);
         } catch (Exception e){
-            log.error("设置值{}失败:{}", key, e.getMessage(), e);
+            log.error("Redis工具->设置值{}失败:{}", key, e.getMessage(), e);
         } finally {
             close(jedis);
         }
@@ -203,7 +203,7 @@ public class RedisUtil {
     public static  String get(String key){
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", key);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
             return null;
         }
 
@@ -211,7 +211,7 @@ public class RedisUtil {
         try {
             result = jedis.get(key);
         } catch (Exception e) {
-            log.error("获取值({})失败:{}", key, e.getMessage(), e);
+            log.error("Redis工具->获取值({})失败:{}", key, e.getMessage(), e);
         } finally {
             close(jedis);
         }
@@ -231,7 +231,7 @@ public class RedisUtil {
     public static long expire(String key, int seconds){
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", key);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
             return FAIL_LONG;
         }
 
@@ -239,7 +239,7 @@ public class RedisUtil {
         try {
             result = jedis.expire(key, seconds);
         } catch (Exception e) {
-            log.error("设置key({})的过期随时间失败:{}", key, e.getMessage(), e);
+            log.error("Redis工具->设置key({})的过期随时间失败:{}", key, e.getMessage(), e);
         } finally {
             close(jedis);
         }
@@ -258,7 +258,7 @@ public class RedisUtil {
     public static boolean exists(String key){
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", key);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
             return false;
         }
 
@@ -266,7 +266,7 @@ public class RedisUtil {
         try {
             result = jedis.exists(key);
         } catch (Exception e) {
-            log.error("判断key({})是否存在失败:{}", key, e.getMessage(), e);
+            log.error("Redis工具->判断key({})是否存在失败:{}", key, e.getMessage(), e);
         } finally {
             close(jedis);
         }
@@ -285,7 +285,7 @@ public class RedisUtil {
     public static long del(String... keys){
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", keys);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", keys);
             return FAIL_LONG;
         }
 
@@ -293,7 +293,7 @@ public class RedisUtil {
         try {
             result = jedis.del(keys);
         } catch (Exception e) {
-            log.error("删除key({})失败:{}", keys, e.getMessage(), e);
+            log.error("Redis工具->删除key({})失败:{}", keys, e.getMessage(), e);
         } finally {
             close(jedis);
         }
@@ -313,7 +313,7 @@ public class RedisUtil {
     public static long setnx(String key, String value){
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", key);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
             return FAIL_LONG;
         }
 
@@ -322,7 +322,7 @@ public class RedisUtil {
         try {
             result = jedis.setnx(key, value);
         } catch (Exception e) {
-            log.error("设置key({})失败:{}", key, e.getMessage(), e);
+            log.error("Redis工具->设置key({})失败:{}", key, e.getMessage(), e);
         } finally {
             close(jedis);
         }
@@ -343,7 +343,7 @@ public class RedisUtil {
     public static long setnx(String key, String value, int expire){
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", key);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
             return FAIL_LONG;
         }
 
@@ -353,7 +353,7 @@ public class RedisUtil {
             result = jedis.setnx(key, value);
             jedis.expire(key, expire);
         } catch (Exception e) {
-            log.error("设置key({})失败:{}", key, e.getMessage(), e);
+            log.error("Redis工具->设置key({})失败:{}", key, e.getMessage(), e);
         } finally {
             close(jedis);
         }
@@ -373,7 +373,7 @@ public class RedisUtil {
     public static long lpush(String key, String... values){
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", key);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
             return FAIL_LONG;
         }
 
@@ -381,7 +381,7 @@ public class RedisUtil {
         try {
             result = jedis.lpush(key, values);
         } catch (Exception e) {
-            log.error("在列表key({})的头部插入元素失败:{}", key, e.getMessage(), e);
+            log.error("Redis工具->在列表key({})的头部插入元素失败:{}", key, e.getMessage(), e);
         } finally {
             close(jedis);
         }
@@ -401,7 +401,7 @@ public class RedisUtil {
     public static long rpush(String key, String... values){
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", key);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
             return FAIL_LONG;
         }
 
@@ -409,7 +409,7 @@ public class RedisUtil {
         try {
             result = jedis.rpush(key, values);
         } catch (Exception e) {
-            log.error("在列表key({})的头部插入元素失败:{}", key, e.getMessage(), e);
+            log.error("Redis工具->在列表key({})的头部插入元素失败:{}", key, e.getMessage(), e);
         } finally {
             close(jedis);
         }
@@ -430,7 +430,7 @@ public class RedisUtil {
     public static List<String> lrange(String key, long start, long end){
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", key);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
             return null;
         }
 
@@ -438,7 +438,7 @@ public class RedisUtil {
         try {
             result = jedis.lrange(key, start, end);
         } catch (Exception e) {
-            log.error("查询列表元素失败:{}", e.getMessage(), e);
+            log.error("Redis工具->查询列表元素失败:{}", e.getMessage(), e);
         } finally {
             close(jedis);
         }
@@ -465,7 +465,7 @@ public class RedisUtil {
         try {
             return JSONUtils.list2list(dataList, clazz);
         } catch (Exception e) {
-            log.error("List<String>转化成List<T>对象失败:{}", e.getMessage(), e);
+            log.error("Redis工具->List<String>转化成List<T>对象失败:{}", e.getMessage(), e);
         }
         return null;
     }
@@ -490,7 +490,7 @@ public class RedisUtil {
         try {
             return JSONUtils.list2list(dataList, clazz);
         } catch (Exception e) {
-            log.error("List<String>转化成List<T>对象失败:{}", e.getMessage(), e);
+            log.error("Redis工具->List<String>转化成List<T>对象失败:{}", e.getMessage(), e);
         }
         return null;
     }
@@ -515,7 +515,7 @@ public class RedisUtil {
         try {
             return dataList;
         } catch (Exception e) {
-            log.error("List<String>转化成List<T>对象失败:{}", e.getMessage(), e);
+            log.error("Redis工具->List<String>转化成List<T>对象失败:{}", e.getMessage(), e);
         }
         return null;
     }
@@ -532,7 +532,7 @@ public class RedisUtil {
     public static long llen(String key){
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", key);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
             return FAIL_LONG;
         }
 
@@ -540,7 +540,7 @@ public class RedisUtil {
         try {
             result = jedis.llen(key);
         } catch (Exception e) {
-            log.error("获取列表长度失败:{}", e.getMessage(), e);
+            log.error("Redis工具->获取列表长度失败:{}", e.getMessage(), e);
         } finally {
             close(jedis);
         }
@@ -564,7 +564,7 @@ public class RedisUtil {
     public static long lrem(String key, long count, String value){
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", key);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
             return FAIL_LONG;
         }
         long result = 0;
@@ -572,7 +572,7 @@ public class RedisUtil {
         try {
             result = jedis.lrem(key, count, key);
         } catch (Exception e) {
-            log.error("移除等于value({})的元素失败:{}", value, e.getMessage(), e);
+            log.error("Redis工具->移除等于value({})的元素失败:{}", value, e.getMessage(), e);
         } finally {
             close(jedis);
         }
@@ -591,14 +591,14 @@ public class RedisUtil {
     public static String ltrim(String key, long start, long stop){
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", key);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
             return null;
         }
         String result = null;
         try {
             result = jedis.ltrim(key, start, stop);
         } catch (Exception e) {
-            log.error("对列表进行修剪失败:{}", e.getMessage(), e);
+            log.error("Redis工具->对列表进行修剪失败:{}", e.getMessage(), e);
         } finally {
             close(jedis);
         }
@@ -617,7 +617,7 @@ public class RedisUtil {
     public static <T> String setObject(String key, T obj){
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", key);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
             return null;
         }
 
@@ -626,7 +626,7 @@ public class RedisUtil {
         try {
             result = jedis.set(key, JSONUtils.obj2json(obj));
         } catch (Exception e) {
-            log.error("设置对象失败:{}", e.getMessage(), e);
+            log.error("Redis工具->设置对象失败:{}", e.getMessage(), e);
         } finally {
             close(jedis);
         }
@@ -645,7 +645,7 @@ public class RedisUtil {
     public static <T> List<T> getList(String key, Class clazz){
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", key);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
             return null;
         }
 
@@ -659,7 +659,7 @@ public class RedisUtil {
                 result = JSONUtils.json2list(value, clazz);
             }
         } catch (Exception e) {
-            log.error("获取对象失败:{}", e.getMessage(), e);
+            log.error("Redis工具->获取对象失败:{}", e.getMessage(), e);
         } finally {
             close(jedis);
         }
@@ -693,7 +693,7 @@ public class RedisUtil {
     public static long hset(String key, String field, String value) {
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", key);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
             return FAIL_LONG;
         }
 
@@ -701,7 +701,7 @@ public class RedisUtil {
         try {
             result = jedis.hset(key, field, value);
         } catch (Exception e) {
-            log.error("缓存Map赋值失败:{}" , e.getMessage(), e);
+            log.error("Redis工具->缓存Map赋值失败:{}" , e.getMessage(), e);
         } finally {
             close(jedis);
         }
@@ -722,7 +722,7 @@ public class RedisUtil {
     public static String hget(String key, String field){
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", key);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
             return null;
         }
 
@@ -730,7 +730,7 @@ public class RedisUtil {
         try {
             result = jedis.hget(key, field);
         } catch (Exception e) {
-            log.error("获取缓存的Map值失败:{}", e.getMessage(), e);
+            log.error("Redis工具->获取缓存的Map值失败:{}", e.getMessage(), e);
         } finally {
             close(jedis);
         }
@@ -753,14 +753,14 @@ public class RedisUtil {
         
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", key);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
             return map;
         }
         
         try {
             map = jedis.hgetAll(key);
         } catch (Exception e) {
-            log.error("获取map所有的字段和值失败:{}", e.getMessage(), e);
+            log.error("Redis工具->获取map所有的字段和值失败:{}", e.getMessage(), e);
         } finally {
             close(jedis);
         }
@@ -781,7 +781,7 @@ public class RedisUtil {
     public static Boolean hexists(String key, String field){
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", key);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
             return false;
         }
 
@@ -790,7 +790,7 @@ public class RedisUtil {
         try {
             result = jedis.hexists(key, field);
         } catch (Exception e) {
-            log.error("查看哈希表field字段是否存在失败:{}", e.getMessage(), e);
+            log.error("Redis工具->查看哈希表field字段是否存在失败:{}", e.getMessage(), e);
         } finally {
             close(jedis);
         }
@@ -811,14 +811,14 @@ public class RedisUtil {
         Set<String> set = new HashSet<String>();
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", key);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
             return set;
         }
 
         try {
             set = jedis.hkeys(key);
         } catch (Exception e) {
-            log.error("获取所有哈希表中的字段失败:{}", e.getMessage(), e);
+            log.error("Redis工具->获取所有哈希表中的字段失败:{}", e.getMessage(), e);
         } finally {
             close(jedis);
         }
@@ -839,14 +839,14 @@ public class RedisUtil {
         List<String> list = new ArrayList<String>();
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", key);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
             return list;
         }
 
         try {
             list = jedis.hvals(key);
         } catch (Exception e) {
-            log.error("获取所有哈希表中的值失败:{}", e.getMessage(), e);
+            log.error("Redis工具->获取所有哈希表中的值失败:{}", e.getMessage(), e);
         } finally {
             close(jedis);
         }
@@ -866,7 +866,7 @@ public class RedisUtil {
     public static long hdel(String key, String... fields){
         Jedis jedis = getJedis();
         if(jedis == null){
-            log.error("redis获取实例失败，操作key:{}", key);
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
             return FAIL_LONG;
         }
 
@@ -875,7 +875,7 @@ public class RedisUtil {
         try {
             result = jedis.hdel(key, fields);
         } catch (Exception e) {
-            log.error("map删除指定的field失败:{}", e.getMessage(), e);
+            log.error("Redis工具->map删除指定的field失败:{}", e.getMessage(), e);
         } finally {
             close(jedis);
         }
