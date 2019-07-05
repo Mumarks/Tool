@@ -3,6 +3,7 @@ package com.tools.base;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 
 public class StringTool {
@@ -26,20 +27,16 @@ public class StringTool {
 	}
 
 	/**
-	 * List按指定分隔符转字符串
+	 * List<String>按指定分隔符转字符串
 	 * @param list
 	 * @param separator
 	 * @return
 	 */
-	public static String listToString(List<?> list, String separator){
+	public static String listToString(List<String> list, String separator){
 		if(list.isEmpty()){
 			return "";
 		}
-		StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < list.size(); i++) {
-            sb.append(list.get(i)).append(separator);
-        }
-        return sb.toString().substring(0, sb.toString().length() - 1);
+        return list.stream().filter(obj -> isNotEmpty(obj)).collect(Collectors.joining(","));
 	}
 	
 	/**

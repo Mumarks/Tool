@@ -6,6 +6,7 @@ import org.aeonbits.owner.ConfigFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.exceptions.JedisConnectionException;
 
 import java.util.*;
 
@@ -111,7 +112,8 @@ public class RedisUtil {
             if(jedisPool != null){
                 jedis = jedisPool.getResource();
             }
-        } catch (Exception e) {
+        }  catch (Exception e) {
+            System.out.println(e.getMessage());
             log.error("Redis工具->同步获取Jedis实例失败:{}", e.getMessage(), e);
             close(jedis);
         }
@@ -238,6 +240,34 @@ public class RedisUtil {
         long result = 0;
         try {
             result = jedis.expire(key, seconds);
+        } catch (Exception e) {
+            log.error("Redis工具->设置key({})的过期随时间失败:{}", key, e.getMessage(), e);
+        } finally {
+            close(jedis);
+        }
+        return result;
+    }
+
+    /**
+     *
+     * 功能描述: 设置key的过期时间
+     *
+     * @param: key
+     * @param: unixTime 过期时间(毫秒级别)
+     * @return: 1：成功  0：失败
+     * @auther: yin_q
+     * @date: 2019/4/12 14:48
+     */
+    public static long expire(String key, long unixTime){
+        Jedis jedis = getJedis();
+        if(jedis == null){
+            log.error("Redis工具->Redis获取实例失败，操作key:{}", key);
+            return FAIL_LONG;
+        }
+
+        long result = 0;
+        try {
+            result = jedis.expireAt(key, unixTime);
         } catch (Exception e) {
             log.error("Redis工具->设置key({})的过期随时间失败:{}", key, e.getMessage(), e);
         } finally {
@@ -882,4 +912,5 @@ public class RedisUtil {
 
         return result;
     }
+
 }
